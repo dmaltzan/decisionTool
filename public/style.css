@@ -1,0 +1,68 @@
+* {
+  font-family: "Arial", sans-serif;
+}
+table {
+  border-collapse: collapse;
+}
+.timer {
+  font-size: 1rem;
+  color: grey;
+}
+
+#busTable td, #busTable th {
+  padding: 0.5rem;
+  text-align: left;
+  font-size: 1rem;
+  width: 10rem;
+  border: none;
+}
+#busTable {
+  table-layout: fixed;
+  border-spacing: 0rem 0.5rem;
+  border-collapse: separate;
+}
+#busTable td:first-child {
+  width: 2rem;
+}
+.redTime {
+  color: red;
+  font-weight: bold;
+}
+
+select {
+  font-size: 1rem;
+}
+
+#pastBusesTable td, #pastBusesTable th{
+  border: none;
+  padding: 0.1rem 0.5rem;
+  text-align: left;
+  font-size: 0.9rem;
+  width: 10rem;
+}
+#pastBusesTable tr:first-child {
+  border-style: none none solid none;
+}
+#pastBusesTable td:first-child, #pastBusesTable th:first-child {
+  width: 2rem;
+}
+
+.busId {
+  color: yellow;
+  background-color: black;
+}
+.busApproaching {
+  color: black;
+  background-color: red;
+}
+.busStatus {
+  font-size: 0.75rem;
+  background-color: #FAE3E6;
+}
+#timeUntilDep {
+  color: orange;
+  font-size: 2rem;
+}
+#departureInstructions {
+  font-weight: bold;
+}

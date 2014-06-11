@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<meta name="viewport" content="width=device-width">
+<head>
+<title>Decision Tool</title>
+</head>
+  <body>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"></link>
+    <div id="clock" class="timer">Current Time:</div>
+    <span id="errorMessage"></span>
+    Select station:
+    <select id="directionSelector">
+      <option value="none"></option>
+      <option value="inbound">Harvard</option>
+      <option value="outbound">Dudley</option>
+    <select>
+    <div id="mainSection">
+      <table id="busTable">
+        <tr><td class="busId">9999</td><td class="busApproaching" colspan="2">APPROACHING</td></tr>
+        <tr>
+          <td></td>
+          <td  colspan="2">
+            <span id="departureInstructions">DEPART IN <span id="timeUntilDep" class="yellowTime">00:00</span> AT <span id="departureTime">8:46:28</span></span>
+            <span id="departASAP" class="yellowTime">DEPART AS SOON AS POSSIBLE AFTER ARRIVAL</span>
+            <br />estimated layover time will be: <span id="layoverTime" class="redTime">00:00</span>
+            <br />scheduled departure time is: <span id="schedDep" class="redTime">1:23</span>
+          </td>
+        </tr>
+      </table>
+      <table id="pastBusesTable">
+        <tr><th colspan="3">Prior Buses</th></tr>
+        <tr><th>Bus</th><th>Sugg. Dep.</th><th>Sched. Dep.</th><th>Actual Dep.</th></tr>
+      </table>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>

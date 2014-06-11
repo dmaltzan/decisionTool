@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>TESTING MODE</title>
+</head>
+  <body>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+    <link rel="stylesheet" type="text/css" href="debugStyle.css"></link>
+    <div id="clock" class="timer">Current Time:</div>
+    <select id="directionSelector">
+      <option value="inbound">Harvard</option>
+      <option value="outbound">Dudley</option>
+    <select>
+    <table id="BusTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Arrival</th>
+          <th>Sched. Dep.</th>
+          <th>Pred. Dep.</th>
+          <th>Sugg. Dep.</th>
+          <th>Act. Dep.</th>
+        </tr>
+      </thead>
+    </table>
+    <canvas id="busDiagram" width="150" height="300"></canvas>
+    <script type="text/javascript" src="debugScript.js"></script>
+  </body>
+</html>
