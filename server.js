@@ -114,7 +114,7 @@ var handleNewPredictions = function(err) {
     
     if (_.isEmpty(departedVehicles)) {
       var errorText = 'No departed vehicles found';
-      vehicles = { inbound: { error: errorText }, outbound: { error: errorText }};
+      vehicles[direction] = { error: errorText };
       return;
     }
     
