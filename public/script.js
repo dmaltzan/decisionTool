@@ -8,24 +8,22 @@ var setIntervalAndExecute = function(fn, t) {
 var formatTime = function(time, isTimespan) {
   if (time == 0 && !isTimespan) { return ''; }
   time = new Date(time);
-  if (isTimespan) {
+  if (!isTimespan) {
+    return time.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'});
+  } else {  // isTimespan == true
     var hours = time.getUTCHours();
     var minutes = time.getUTCMinutes();
     var seconds = time.getUTCSeconds() + (time.getUTCMilliseconds() >= 500 ? 1 : 0);
-  } else {
-    var hours = time.getHours();
-    var minutes = time.getMinutes();
-    var seconds = time.getSeconds() + (time.getMilliseconds() >= 500 ? 1 : 0);
-  }
 
-  if (hours < 10) { hours = "0" + hours; }
-  if (minutes < 10) { minutes = "0" + minutes; }
-  if (seconds < 10) { seconds = "0" + seconds; }
+    if (hours < 10) { hours = "0" + hours; }
+    if (minutes < 10) { minutes = "0" + minutes; }
+    if (seconds < 10) { seconds = "0" + seconds; }
   
-  if (hours === '00' && isTimespan) {
-    return minutes + ':' + seconds;
-  } else {
-    return hours + ':' + minutes + ':' + seconds;
+    if (hours === '00') {
+      return minutes + ':' + seconds;
+    } else {
+      return hours + ':' + minutes + ':' + seconds;
+    }
   }
 };
 
@@ -48,12 +46,20 @@ var displayNextDepInfo = function(vehicle) {
   nextSuggDeparture = Math.round(+vehicle.suggDeparture / 1000) * 1000;
   var now = new Date();
   updateTimeUntilDep(now);
-  $('#departureTime').text(formatTime(nextSuggDeparture));
-  if (nextSuggDeparture > +vehicle.arrivalTime) {
-    $('#layoverTime').text(formatTime(nextSuggDeparture - +vehicle.arrivalTime, true));
+  if (+vehicle.suggDeparture >= +vehicle.arrivalTime && +vehicle.suggDeparture <= +vehicle.arrivalTime + 60000) {
+    $('#timeUntilDep, #departureTime').removeClass('greenTime').addClass('orangeTime');
+    $('#departureTime').text('ASAP (on arrival)');
+    $('#countdownSection').hide();
+  } else if (+vehicle.suggDeparture >= +vehicle.schedDeparture && +vehicle.suggDeparture <= +vehicle.schedDeparture + 60000){
+    $('#countdownSection').show();
+    $('#timeUntilDep, #departureTime').removeClass('orangeTime').addClass('greenTime');
+    $('#departureTime').text(formatTime(nextSuggDeparture) + ' (as normal)');
   } else {
-    $('#layoverTime').text('00:00');
+    $('#countdownSection').show();
+    $('#timeUntilDep, #departureTime').removeClass('greenTime').addClass('orangeTime');
+    $('#departureTime').text(formatTime(nextSuggDeparture));
   }
+  
   $('#schedDep').text(formatTime(vehicle.schedDeparture));
 };
 

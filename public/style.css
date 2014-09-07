@@ -59,9 +59,12 @@ select {
   font-size: 0.75rem;
   background-color: #FAE3E6;
 }
-#timeUntilDep {
+.orangeTime {
   color: orange;
   font-size: 2rem;
+}
+.greenTime {
+  color: #16A616;
 }
 #departureInstructions {
   font-weight: bold;

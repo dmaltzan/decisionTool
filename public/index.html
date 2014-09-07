@@ -9,7 +9,7 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css"></link>
     <div id="clock" class="timer">Current Time:</div>
-    <span id="errorMessage"></span>
+    <p id="errorMessage"></p>
     Select station:
     <select id="directionSelector">
       <option value="none"></option>
@@ -22,8 +22,7 @@
         <tr>
           <td></td>
           <td  colspan="2">
-            <span id="departureInstructions">DEPART IN <span id="timeUntilDep">00:00</span> AT <span id="departureTime">8:46:28</span></span>
-            <br />estimated layover time will be: <span id="layoverTime" class="redTime">00:00</span>
+            <span id="departureInstructions">DEPART: <span id="departureTime">8:46:28</span><span id="countdownSection"> IN <span id="timeUntilDep">00:00</span></span></span>
             <br />scheduled departure time is: <span id="schedDep" class="redTime">1:23</span>
           </td>
         </tr>
