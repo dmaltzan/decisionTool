@@ -5,7 +5,7 @@ var _ = require('underscore');
 var Logger = require('./Logger.js');
 
 var getSnapshotString = function(v) {
-  return [v.eventId, v.currentTime, v.suggDeparture, v.predDeparture, v.arrivalTime, v.status].join(',') + '\n';
+  return [v.dateStr, v.id, v.apprTripId, v.depTripId, v.direction, v.currentTime, v.suggDeparture, v.predDeparture, v.arrivalTime, v.status].join(',') + '\n';
 };
 
 var getStream = function(tableName, columnList) {
@@ -23,10 +23,6 @@ var getStream = function(tableName, columnList) {
   return stream;
 };
 
-// function: if event_id not found in decision_tool_events table, insert new row in
-
-// function: update row in decision_tool_events where event_id = event_id, set stuff
-
 var getYYYYMMDD = function(date) {
   var yyyy = date.getFullYear().toString();
   var mm = (date.getMonth()+1).toString(); // getMonth() is zero-based
@@ -36,13 +32,13 @@ var getYYYYMMDD = function(date) {
 
 module.exports = {
   writeSnapshotToDb: function(vehicles) {
-    var stream = getStream('decision_tool_snapshots', 'event_id, "current_time", sugg_dep, pred_dep, arrival, status');
+    var stream = getStream('decision_tool_snapshots', 'date_str, vehicle_id, appr_trip_id, dep_trip_id, direction, "current_time", sugg_dep, pred_dep, arrival, status');
     _.each(vehicles, function(vehDir, dir) {
       _.each(vehDir, function(v) {
         if (!_.isEmpty(v)) {
           v.direction = dir;
           v.currentTime = new Date().getTime();
-          v.eventId = getYYYYMMDD(new Date()) + '-' + v.apprTripId + '-' + v.direction;
+          v.dateStr = getYYYYMMDD(new Date());
           stream.write(getSnapshotString(v));
         }
       });
