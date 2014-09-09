@@ -9,7 +9,19 @@ var formatTime = function(time, isTimespan) {
   if (time == 0 && !isTimespan) { return ''; }
   time = new Date(time);
   if (!isTimespan) {
-    return time.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'});
+    var hour = time.getHours();
+    var minute = time.getMinutes();
+    if (minute < 10) { minute = '0' + minute; }
+    var mid = 'AM';
+    if(hour == 0) { // At 00 hours we need to show 12 am
+      hour = 12;
+    }
+    else if (hour > 12) {
+      hour = hour % 12;
+      mid = 'PM';
+    }
+    return hour + ':' + minute + ' ' + mid;
+    //return time.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'});
   } else {  // isTimespan == true
     var hours = time.getUTCHours();
     var minutes = time.getUTCMinutes();
