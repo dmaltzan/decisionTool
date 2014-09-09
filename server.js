@@ -133,7 +133,6 @@ var handleNewPredictions = function(err) {
       var arrPred = Predictions.getByStopAndVehicle(Stops[direction].thisStop, tempVehicle.id);
       // if there is an arrival time pred for this stop use it
       if (arrPred) {// && tempVehicle.predDeparture > tempVehicle.arrivalTime) { // bug fix: vehicle may have an arrival time pred for the NEXT TRIP
-        console.log('vehicle ' + tempVehicle.id + ' is Approaching');
         tempVehicle.arrivalTime = Math.round(arrPred.$.epochTime);
         tempVehicle.status = 'Approaching';
         if (vehicles[tempVehicle.id] && vehicles[tempVehicle.id].schedDeparture) {
@@ -144,12 +143,10 @@ var handleNewPredictions = function(err) {
         tempVehicle.predDeparture = +vehDepThisStop[i].$.epochTime;
         tempVehicle.apprTripId = arrPred.$.tripTag;
       } else if (vehicles[direction][tempVehicle.id]) { // else if there was already a value use that
-        console.log('vehicle ' + tempVehicle.id + ' is Terminal 1');
         tempVehicle = vehicles[direction][tempVehicle.id];
         tempVehicle.status = 'Terminal';
         tempVehicle.predDeparture = +vehDepThisStop[i].$.epochTime;
       } else { // else assume arrived just now
-        console.log('vehicle ' + tempVehicle.id + ' is Terminal 2');
         tempVehicle.arrivalTime = Math.round(new Date().getTime());
         tempVehicle.status = 'Terminal';
         tempVehicle.schedDeparture = Schedule.getNextSchedDep(vehDepThisStop[i].$.block, direction);
