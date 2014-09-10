@@ -69,7 +69,7 @@ var getSuggDeparture = function(v, leading, trailing) {
   var trailingDep = Math.max(+trailing.arrivalTime + layoverTime, trailing.schedDeparture);
   suggDep = (leading.departureTime + trailingDep) / 2;
   
-  return Math.round(Math.max(suggDep, v.schedDeparture));
+  return Math.round(Math.min(Math.max(suggDep, v.schedDeparture), +v.schedDeparture + 360000));
 };
 
 var handleNewPredictions = function(err) {
@@ -176,6 +176,7 @@ var handleNewPredictions = function(err) {
     var mostRecDep = _.max(departedVehicles, function(v) { return v.departureTime; });
     notYetDeparted[sortedVeh[0]].suggDeparture = getSuggDeparture(notYetDeparted[sortedVeh[0]], mostRecDep, notYetDeparted[sortedVeh[1]]);
     
+    // If earlier than arrival time, display it as equal to arrival time (should this be done client-side?)
     if (notYetDeparted[sortedVeh[0]].suggDeparture < notYetDeparted[sortedVeh[0]].arrivalTime) {
       notYetDeparted[sortedVeh[0]].suggDeparture = notYetDeparted[sortedVeh[0]].arrivalTime;
     }
