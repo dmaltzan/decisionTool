@@ -5,7 +5,7 @@ var _ = require('underscore');
 var Logger = require('./Logger.js');
 
 var getSnapshotString = function(v) {
-  return [v.dateStr, v.id, v.apprTripId, v.depTripId, v.direction, v.currentTime, v.suggDeparture, v.predDeparture, v.arrivalTime, v.status].join(',') + '\n';
+  return [v.dateStr, v.id, v.apprTripId, v.depTripId, v.direction, v.currentTime, v.suggDeparture, v.predDeparture, v.departureTime, v.schedDeparture, v.arrivalTime, v.status].join(',') + '\n';
 };
 
 var getStream = function(tableName, columnList) {
@@ -32,7 +32,7 @@ var getYYYYMMDD = function(date) {
 
 module.exports = {
   writeSnapshotToDb: function(vehicles) {
-    var stream = getStream('decision_tool_snapshots', 'date_str, vehicle_id, appr_trip_id, dep_trip_id, direction, "current_time", sugg_dep, pred_dep, arrival, status');
+    var stream = getStream('decision_tool_snapshots', 'date_str, vehicle_id, appr_trip_id, dep_trip_id, direction, "current_time", sugg_dep, pred_dep, departure_time, sched_departure, arrival, status');
     _.each(vehicles, function(vehDir, dir) {
       _.each(vehDir, function(v) {
         if (!_.isEmpty(v)) {
