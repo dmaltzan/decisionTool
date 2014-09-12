@@ -58,7 +58,7 @@ var displayNextDepInfo = function(vehicle) {
   nextSuggDeparture = Math.round(+vehicle.suggDeparture / 1000) * 1000;
   var now = new Date();
   updateTimeUntilDep(now);
-  if (+vehicle.suggDeparture >= +vehicle.arrivalTime && +vehicle.suggDeparture <= +vehicle.arrivalTime + 60000) {
+  if (+vehicle.suggDeparture <= +vehicle.arrivalTime + 60000) {
     $('#timeUntilDep, #departureTime').removeClass('greenTime').addClass('orangeTime');
     $('#departureTime').text('ASAP (on arrival)');
     $('#countdownSection').hide();
